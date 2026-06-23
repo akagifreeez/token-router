@@ -46,6 +46,24 @@ floor is protected three ways:
 3. **Panic button.** `--safety-mode` forces every task to the remote model — a
    valid, maximally-accurate (if less efficient) submission in the worst case.
 
+## Verified run (real model)
+
+Local-only pass with **`qwen2.5:3b-instruct`** (real Ollama, not mocked) over the
+24-task proxy suite:
+
+| metric | value |
+|---|---|
+| accuracy | **93.9%** (24 tasks) |
+| kept local | 100% (threshold 0) |
+| API cost | **$0.000000** |
+| mean latency | ~128 ms/call |
+| token accounting | real (Ollama-reported, not estimated) |
+
+Takeaway: a small local model already clears the easy/medium tasks, so the
+router can keep most work local for **zero API cost** and escalate only the hard
+cases. The full local↔remote accuracy-vs-cost frontier is produced by
+`evals/run_eval.py` once a Fireworks key is set.
+
 ## Quickstart
 
 ```bash
