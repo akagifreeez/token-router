@@ -13,6 +13,8 @@ from typing import Dict, Optional, Tuple
 # model id -> (prompt_usd_per_1M, completion_usd_per_1M). Placeholder Fireworks
 # figures; finalize at kickoff. Keyed by the exact model id used in requests.
 DEFAULT_PRICES: Dict[str, Tuple[float, float]] = {
+    # Placeholder figures; confirm on the Fireworks pricing page at kickoff.
+    "accounts/fireworks/models/gpt-oss-20b": (0.10, 0.40),
     "accounts/fireworks/models/llama-v3p1-8b-instruct": (0.20, 0.20),
     "accounts/fireworks/models/llama-v3p1-70b-instruct": (0.90, 0.90),
     "accounts/fireworks/models/qwen2p5-72b-instruct": (0.90, 0.90),

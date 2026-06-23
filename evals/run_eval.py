@@ -95,7 +95,7 @@ def main(argv=None) -> int:
     p.add_argument("--mock", action="store_true", help="use offline mock models (smoke test)")
     p.add_argument("--threshold", type=int, default=None, help="single threshold instead of a sweep")
     p.add_argument("--local-model", default=os.environ.get("LOCAL_MODEL", "qwen2.5:3b-instruct"))
-    p.add_argument("--remote-model", default=os.environ.get("FIREWORKS_MODEL", "accounts/fireworks/models/llama-v3p1-8b-instruct"))
+    p.add_argument("--remote-model", default=os.environ.get("FIREWORKS_MODEL", "accounts/fireworks/models/gpt-oss-20b"))
     p.add_argument("--categories", nargs="*", help="limit to these proxy categories")
     args = p.parse_args(argv)
 
@@ -103,6 +103,19 @@ def main(argv=None) -> int:
     if not tasks:
         print("no proxy tasks found", file=sys.stderr)
         return 2
+
+    # Preflight: validate the remote model BEFORE the (local-heavy) sweep, so a
+    # bad/unavailable model id fails fast with guidance instead of crashing
+    # mid-run. Fireworks serverless ids drift; this catches that immediately.
+    if not args.mock:
+        from token_router.models.base import ModelError
+        from token_router.models.fireworks import FireworksModel
+        try:
+            FireworksModel(args.remote_model).complete("ping", max_tokens=1)
+        except ModelError as e:
+            print(f"remote preflight FAILED for {args.remote_model}:\n  {e}", file=sys.stderr)
+            print("Run `python evals/find_remote_model.py` to find a working --remote-model.", file=sys.stderr)
+            return 3
 
     thresholds = [args.threshold] if args.threshold is not None else [0, 50, 60, 70, 80, 90, 100]
     print(f"proxy tasks: {len(tasks)}  (mock={args.mock})")

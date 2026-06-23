@@ -46,23 +46,24 @@ floor is protected three ways:
 3. **Panic button.** `--safety-mode` forces every task to the remote model — a
    valid, maximally-accurate (if less efficient) submission in the worst case.
 
-## Verified run (real model)
+## Verified run (real models, end-to-end)
 
-Local-only pass with **`qwen2.5:3b-instruct`** (real Ollama, not mocked) over the
-24-task proxy suite:
+Real pass over the 24-task proxy suite — local **`qwen2.5:3b-instruct`** (Ollama)
+routed against remote **`gpt-oss-20b`** (Fireworks). Accuracy-vs-cost frontier
+from `evals/run_eval.py`, with real token accounting (not mocked, not estimated):
 
-| metric | value |
-|---|---|
-| accuracy | **93.9%** (24 tasks) |
-| kept local | 100% (threshold 0) |
-| API cost | **$0.000000** |
-| mean latency | ~128 ms/call |
-| token accounting | real (Ollama-reported, not estimated) |
+| keep-threshold | accuracy | total tokens | API cost | kept local |
+|---|---|---|---|---|
+| 0 (all-local) | 93.9% | 4,430 | $0.000000 | 100% |
+| 50–80 | 93.9% | 4,590 | $0.000030 | 95.8% |
+| 90–100 | **94.9%** | 4,811 | $0.000081 | 91.7% |
 
-Takeaway: a small local model already clears the easy/medium tasks, so the
-router can keep most work local for **zero API cost** and escalate only the hard
-cases. The full local↔remote accuracy-vs-cost frontier is produced by
-`evals/run_eval.py` once a Fireworks key is set.
+Takeaway: the router keeps **92–100% of tasks on the free local model** while
+holding ~94% accuracy, spending remote tokens only on the low-confidence tail.
+On this (deliberately easy) proxy set the local model is already strong, so
+escalation adds ~1 pt; on a harder hidden task set the same mechanism shifts more
+work to the remote model to defend the accuracy floor. Reproduce with
+`python evals/run_eval.py` (needs Ollama + `FIREWORKS_API_KEY`).
 
 ## Quickstart
 
