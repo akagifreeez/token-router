@@ -1,0 +1,5 @@
+{"id": "ext-1", "category": "extraction", "input": "Extract the email address from this text: 'Please contact me at john.doe@example.com for details.'", "gold": "john.doe@example.com"}
+{"id": "ext-2", "category": "extraction", "input": "Extract the year from this text: 'The Peace of Westphalia was signed in 1648.'", "gold": "1648"}
+{"id": "ext-3", "category": "extraction", "input": "Extract the full person name from this text: 'My name is Maria Garcia and I am a teacher.'", "gold": "Maria Garcia"}
+{"id": "ext-4", "category": "extraction", "input": "Extract the phone number from this text: 'Call our office at 555-0142 during business hours.'", "gold": "555-0142"}
+{"id": "ext-5", "category": "extraction", "input": "Extract the city from this text: 'The conference will be held in Berlin next spring.'", "gold": "Berlin"}

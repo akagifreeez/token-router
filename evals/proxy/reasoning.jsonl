@@ -1,0 +1,5 @@
+{"id": "rsn-1", "category": "reasoning", "input": "If a train travels 60 km in 2 hours, what is its average speed in km/h? Answer with just the number.", "gold": "30"}
+{"id": "rsn-2", "category": "reasoning", "input": "Tom has 3 apples and buys 5 more. How many apples does he have now? Answer with just the number.", "gold": "8"}
+{"id": "rsn-3", "category": "reasoning", "input": "What is 15% of 200? Answer with just the number.", "gold": "30"}
+{"id": "rsn-4", "category": "reasoning", "input": "A rectangle is 4 meters wide and 6 meters long. What is its area in square meters? Answer with just the number.", "gold": "24"}
+{"id": "rsn-5", "category": "reasoning", "input": "If today is Wednesday, what day will it be in 3 days? Answer with just the day name.", "gold": "Saturday"}

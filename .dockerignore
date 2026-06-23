@@ -1,0 +1,16 @@
+.venv/
+venv/
+.git/
+.gitignore
+evals/
+tests/
+results/
+data/*.jsonl
+*.gguf
+models/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+README.md

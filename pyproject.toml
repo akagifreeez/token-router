@@ -1,0 +1,36 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "token-router"
+version = "0.1.0"
+description = "Hybrid token-efficient routing agent: routes each task between a local model and the Fireworks AI API to minimize cost while holding an accuracy floor."
+readme = "README.md"
+requires-python = ">=3.9"
+license = { text = "MIT" }
+authors = [{ name = "akagifreeez", email = "akagifreeezworks@gmail.com" }]
+keywords = ["llm", "routing", "fireworks", "ollama", "token-efficiency", "agent", "cascade"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+]
+# v1 runtime needs only the stdlib + requests. Both Fireworks and Ollama are
+# spoken over their OpenAI-compatible REST endpoints, so no vendor SDK is pulled
+# in - keeping the dependency surface (and the Docker image) small.
+dependencies = ["requests>=2.28,<3"]
+
+[project.optional-dependencies]
+dev = ["pytest>=7"]
+
+[project.scripts]
+token-router = "token_router.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/akagifreeez/token-router"
+Repository = "https://github.com/akagifreeez/token-router"
+
+[tool.hatch.build.targets.wheel]
+packages = ["token_router"]

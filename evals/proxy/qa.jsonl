@@ -1,0 +1,6 @@
+{"id": "qa-1", "category": "qa", "input": "What is the capital of France?", "gold": "Paris"}
+{"id": "qa-2", "category": "qa", "input": "What is the chemical symbol for gold?", "gold": "Au"}
+{"id": "qa-3", "category": "qa", "input": "Who wrote the play Romeo and Juliet?", "gold": "William Shakespeare"}
+{"id": "qa-4", "category": "qa", "input": "What is the largest planet in our solar system?", "gold": "Jupiter"}
+{"id": "qa-5", "category": "qa", "input": "In what year did World War II end?", "gold": "1945"}
+{"id": "qa-6", "category": "qa", "input": "What is the largest ocean on Earth?", "gold": "Pacific Ocean"}
