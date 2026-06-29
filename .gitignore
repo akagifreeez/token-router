@@ -20,7 +20,10 @@ config.json
 results/
 data/*.jsonl
 *.gguf
-models/
+# NOTE: anchored to repo root so it ignores a downloaded-weights dir, NOT the
+# token_router/models/ source package (a bare "models/" excluded the package and
+# broke `pip install git+...`).
+/models/
 
 # Tooling
 .pytest_cache/
